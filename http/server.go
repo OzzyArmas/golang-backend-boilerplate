@@ -22,14 +22,14 @@ func addGroups(r *gin.Engine, resolver *graph.Resolver) {
 		query.POST("/", graphqlHandler(resolver))
 	}
 	query.GET("/", playgroundHandler())
-
+	health := r.Group("/health")
+	{
+		health.GET("/", healthFunction)
+	}
 }
 
-func adminFunction(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{"adminFunction": "adminFunction content"})
-}
-func usersFunction(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, gin.H{"usersFunction": "usersFunction content"})
+func healthFunction(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, gin.H{"Hello": "World!"})
 }
 
 func graphqlHandler(resolver *graph.Resolver) gin.HandlerFunc {
@@ -49,7 +49,6 @@ func playgroundHandler() gin.HandlerFunc {
 }
 
 func Server(
-	ctx context.Context,
 	lc fx.Lifecycle,
 	cfg *config.Config,
 	log *zap.Logger,

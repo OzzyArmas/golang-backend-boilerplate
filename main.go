@@ -26,7 +26,7 @@ func main() {
 			zap.NewProduction,
 			graph.NewResolver,
 		),
-		fx.Invoke(func(config.Config, *gin.Engine) {}),
+		fx.Invoke(func(*config.Config, *gin.Engine) {}),
 	)
 	app.Run()
 }

@@ -18,7 +18,6 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input *model.CreateUs
 
 // GetUser is the resolver for the getUser field.
 func (r *queryResolver) GetUser(ctx context.Context, userID *string) (*model.User, error) {
-	r.log.Info("Is this shit even being hit")
 	panic(fmt.Errorf("not implemented: GetUser - getUser"))
 }
 

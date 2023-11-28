@@ -14,7 +14,7 @@ func getViber() *viper.Viper {
 	return v
 }
 
-func NewConfig(log zap.Logger) (*Config, error) {
+func NewConfig(log *zap.Logger) (*Config, error) {
 	log.Info("NewConfig")
 	v := getViber()
 	if err := v.ReadInConfig(); err != nil {

@@ -21,3 +21,4 @@ input CreateUserInput {
 type Mutation {
   createUser(input: CreateUserInput): ID!
 }
+
