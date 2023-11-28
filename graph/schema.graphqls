@@ -1,0 +1,75 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type Todo {
+  id: ID!
+  text: String!
+  done: Boolean!
+  user: User!
+}
+
+type User {
+  user_id: String!
+  user_name: String!
+  phone_number: String!
+}
+
+
+type Token {
+  token_id: String!
+  user_id: String!
+  expires_at: String!
+}
+
+type GeoLocation {
+    long: Float!
+    lat: Float!
+}
+
+type Location {
+    location_id: String!
+    point: GeoLocation!
+}
+
+type Bathroom {
+    bathroom_id: String!
+    title: String!
+    description: String!
+    last_used: String # TODO: look into making this a date
+    last_updated_by: String
+    is_public: Boolean
+    is_customer_only: Boolean
+    is_pay_to_use: Boolean!
+    venue_type: String!
+    flagged: Boolean!
+}
+
+type Query {
+  getUser(user_id: String): User!
+  getToken: Token!
+  getLocations: [Location]!  # @authenticateduser
+  getBathroom(location_id: String): Bathroom!
+}
+
+input NewTodo {
+  text: String!
+  userId: String!
+}
+
+type CreateBathroomMutationResponse {
+    bathroom_id: String!
+}
+
+input BathroomInput {
+    title: String!
+    description: String!
+    is_public: Boolean
+    is_customer_only: Boolean
+    venue_type: String!
+}
+
+type Mutation {
+  createBathroom(input: BathroomInput): CreateBathroomMutationResponse!
+  createTodo(input: NewTodo!): Todo!
+}
