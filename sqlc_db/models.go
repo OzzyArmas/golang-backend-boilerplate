@@ -8,15 +8,9 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-type Bowl struct {
-	BowlID     string
-	LocationID string
-	CreatedAt  pgtype.Timestamp
-	Descriptor string
-}
-
-type Location struct {
-	LocationID string
-	Geom       interface{}
-	CreatedAt  pgtype.Timestamp
+type User struct {
+	UserID      string
+	UserName    string
+	PhoneNumber string
+	CreatedAt   pgtype.Timestamp
 }

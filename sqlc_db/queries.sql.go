@@ -9,26 +9,37 @@ import (
 	"context"
 )
 
-const getAllLocations = `-- name: GetAllLocations :many
-select location_id, geom, created_at from locations
+const createUser = `-- name: CreateUser :one
+INSERT INTO users (user_name, phone_number)
+    VALUES ($1, $2) 
+    RETURNING user_id
 `
 
-func (q *Queries) GetAllLocations(ctx context.Context) ([]Location, error) {
-	rows, err := q.db.Query(ctx, getAllLocations)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-	var items []Location
-	for rows.Next() {
-		var i Location
-		if err := rows.Scan(&i.LocationID, &i.Geom, &i.CreatedAt); err != nil {
-			return nil, err
-		}
-		items = append(items, i)
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-	return items, nil
+type CreateUserParams struct {
+	UserName    string
+	PhoneNumber string
+}
+
+func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (string, error) {
+	row := q.db.QueryRow(ctx, createUser, arg.UserName, arg.PhoneNumber)
+	var user_id string
+	err := row.Scan(&user_id)
+	return user_id, err
+}
+
+const getUser = `-- name: GetUser :one
+SELECT user_id, user_name, phone_number, created_at FROM users
+    WHERE user_id = $1
+`
+
+func (q *Queries) GetUser(ctx context.Context, userID string) (User, error) {
+	row := q.db.QueryRow(ctx, getUser, userID)
+	var i User
+	err := row.Scan(
+		&i.UserID,
+		&i.UserName,
+		&i.PhoneNumber,
+		&i.CreatedAt,
+	)
+	return i, err
 }

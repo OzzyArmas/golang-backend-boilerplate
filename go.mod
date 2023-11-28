@@ -1,4 +1,4 @@
-module github.com/BowlFinder/bowl-finder-server
+module github.com/OzzyArmas/golang-backend-boilerplate
 
 go 1.21.4
 
@@ -7,11 +7,10 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/jackc/pgx/v5 v5.5.0
 	github.com/pressly/goose/v3 v3.16.0
-	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.17.0
 	github.com/vektah/gqlparser/v2 v2.5.10
 	go.uber.org/fx v1.20.1
-	go.uber.org/zap v1.23.0
+	go.uber.org/zap v1.26.0
 )
 
 require (
@@ -56,7 +55,6 @@ require (
 	github.com/ugorji/go/codec v1.2.11 // indirect
 	github.com/urfave/cli/v2 v2.25.5 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
-	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/dig v1.17.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/arch v0.3.0 // indirect

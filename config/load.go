@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	"go.uber.org/zap"
 )
 
 func getViber() *viper.Viper {
@@ -14,7 +14,7 @@ func getViber() *viper.Viper {
 	return v
 }
 
-func NewConfig() (*Config, error) {
+func NewConfig(log zap.Logger) (*Config, error) {
 	log.Info("NewConfig")
 	v := getViber()
 	if err := v.ReadInConfig(); err != nil {

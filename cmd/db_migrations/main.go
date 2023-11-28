@@ -9,24 +9,22 @@ import (
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/pressly/goose/v3"
-	"github.com/sirupsen/logrus"
 )
 
 var (
-    flags = flag.NewFlagSet("goose", flag.ExitOnError)
-	dir = "./cmd/db_migrations/migrations"
+	flags = flag.NewFlagSet("goose", flag.ExitOnError)
+	dir   = "./cmd/db_migrations/migrations"
 )
 
 func main() {
-    flags.Parse(os.Args[1:])
+	flags.Parse(os.Args[1:])
 	args := flags.Args()
-    command := "up"
-    if len(args) == 1 {
-        command = args[0]
-    }
-    
+	command := "up"
+	if len(args) == 1 {
+		command = args[0]
+	}
+
 	dbString := os.Getenv("GOOSE_DBSTRING")
-    logrus.Info(dbString)
 	db, err := goose.OpenDBWithDriver("pgx", dbString)
 	if err != nil {
 		log.Fatalf("goose: failed to open DB: %v\n", err)

@@ -8,38 +8,18 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/BowlFinder/bowl-finder-server/graph/model"
+	"github.com/OzzyArmas/golang-backend-boilerplate/graph/model"
 )
 
-// CreateBathroom is the resolver for the createBathroom field.
-func (r *mutationResolver) CreateBathroom(ctx context.Context, input *model.BathroomInput) (*model.CreateBathroomMutationResponse, error) {
-	panic(fmt.Errorf("not implemented: CreateBathroom - createBathroom"))
-}
-
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: CreateTodo - createTodo"))
+// CreateUser is the resolver for the createUser field.
+func (r *mutationResolver) CreateUser(ctx context.Context, input *model.CreateUserInput) (string, error) {
+	panic(fmt.Errorf("not implemented: CreateUser - createUser"))
 }
 
 // GetUser is the resolver for the getUser field.
 func (r *queryResolver) GetUser(ctx context.Context, userID *string) (*model.User, error) {
 	r.log.Info("Is this shit even being hit")
 	panic(fmt.Errorf("not implemented: GetUser - getUser"))
-}
-
-// GetToken is the resolver for the getToken field.
-func (r *queryResolver) GetToken(ctx context.Context) (*model.Token, error) {
-	panic(fmt.Errorf("not implemented: GetToken - getToken"))
-}
-
-// GetLocations is the resolver for the getLocations field.
-func (r *queryResolver) GetLocations(ctx context.Context) ([]*model.Location, error) {
-	panic(fmt.Errorf("not implemented: GetLocations - getLocations"))
-}
-
-// GetBathroom is the resolver for the getBathroom field.
-func (r *queryResolver) GetBathroom(ctx context.Context, locationID *string) (*model.Bathroom, error) {
-	panic(fmt.Errorf("not implemented: GetBathroom - getBathroom"))
 }
 
 // Mutation returns MutationResolver implementation.
@@ -50,13 +30,3 @@ func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//     it when you're done.
-//   - You have helper methods in this file. Move them out to keep these resolver files clean.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	panic(fmt.Errorf("not implemented: Todos - todos"))
-}

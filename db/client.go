@@ -3,7 +3,7 @@ package db
 import (
 	"context"
 
-	"github.com/BowlFinder/bowl-finder-server/sqlc_db"
+	"github.com/OzzyArmas/golang-backend-boilerplate/sqlc_db"
 	"github.com/jackc/pgx/v5"
 )
 

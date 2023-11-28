@@ -6,8 +6,8 @@ import (
 	"net"
 	"net/http"
 
-	"github.com/BowlFinder/bowl-finder-server/config"
-	"github.com/BowlFinder/bowl-finder-server/graph"
+	"github.com/OzzyArmas/golang-backend-boilerplate/config"
+	"github.com/OzzyArmas/golang-backend-boilerplate/graph"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -17,22 +17,11 @@ import (
 )
 
 func addGroups(r *gin.Engine, resolver *graph.Resolver) {
-	api := r.Group("/api") // generic use facing
-	{
-		admin := api.Group("/admin")
-		{
-			admin.GET("/", adminFunction)
-		}
-		users := api.Group("/users")
-		{
-			users.GET("/", usersFunction)
-		}
-	}
-	query := r.Group("/query") // device facing
+	query := r.Group("/query")
 	{
 		query.POST("/", graphqlHandler(resolver))
 	}
-    query.GET("/", playgroundHandler())
+	query.GET("/", playgroundHandler())
 
 }
 

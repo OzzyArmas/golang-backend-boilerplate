@@ -1,12 +1,10 @@
 package main
 
 import (
-	"context"
-
-	"github.com/BowlFinder/bowl-finder-server/config"
-	"github.com/BowlFinder/bowl-finder-server/db"
-	"github.com/BowlFinder/bowl-finder-server/graph"
-	"github.com/BowlFinder/bowl-finder-server/http"
+	"github.com/OzzyArmas/golang-backend-boilerplate/config"
+	"github.com/OzzyArmas/golang-backend-boilerplate/db"
+	"github.com/OzzyArmas/golang-backend-boilerplate/graph"
+	"github.com/OzzyArmas/golang-backend-boilerplate/http"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
@@ -14,26 +12,21 @@ import (
 	"go.uber.org/zap"
 )
 
-func startEngine(context.Context, *config.Config, *gin.Engine) {
-    // zap.Info("Starting program!!!!")
-}
-
 func main() {
 
 	app := fx.New(
-        fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
-            
-            return &fxevent.ZapLogger{Logger: log}
-        }),
-        fx.Provide(
-            context.Background, 
-            http.Server,
-            config.NewConfig,
-            db.New,
-            zap.NewProduction,
-            graph.NewResolver,
-        ),
-		fx.Invoke(startEngine),
+		fx.WithLogger(func(log *zap.Logger) fxevent.Logger {
+
+			return &fxevent.ZapLogger{Logger: log}
+		}),
+		fx.Provide(
+			http.Server,
+			config.NewConfig,
+			db.New,
+			zap.NewProduction,
+			graph.NewResolver,
+		),
+		fx.Invoke(func(config.Config, *gin.Engine) {}),
 	)
 	app.Run()
 }
