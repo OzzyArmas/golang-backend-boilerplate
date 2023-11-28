@@ -1,2 +1,2 @@
-# bowl-finder-server
+# Golang Backend Boiler Plate
 Service Code for Bowl Finder
